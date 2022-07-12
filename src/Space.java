@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class Space implements Runnable{
     static SpacePanel spacePanel;
@@ -9,7 +11,9 @@ public class Space implements Runnable{
     static int xDelta = 150;
     static int yDelta = 150;
 
-    static int xDirErde = 1;
+    static double xDirErde;
+    static double yDirErde;
+    double zaehler = 0;
 
     public Space() {
         spacePanel = new SpacePanel();
@@ -20,6 +24,19 @@ public class Space implements Runnable{
         setFrame();
 
         new Thread(this).start();
+        erdeOrbit();
+    }
+    public void erdeOrbit() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            @Override
+            public void run() {
+                xDirErde = (310 * (Math.cos(zaehler))+(spaceFrame.getWidth()/2));
+                yDirErde = (309 * (Math.sin(zaehler))+(spaceFrame.getHeight()/2));
+                spacePanel.repaint();
+                zaehler = zaehler+0.0001;
+            }
+        },0,10);
     }
     public void setFrame() {
         spaceFrame = new JFrame("Weltraum");
@@ -67,18 +84,15 @@ public class Space implements Runnable{
 
         while(true) {
             long jetztZeit = System.nanoTime();
-
+            //region fps
             deltaU += (jetztZeit - letzteZeit) / timePerUpdate;
             deltaF += (jetztZeit - letzteZeit) / timePerFrame;
-            letzteZeit = jetztZeit;
 
             if (deltaU >= 1) {
                 updates++;
                 deltaU--;
             }
             if (deltaF >= 1) {
-                xDirErde+=1;
-                spacePanel.repaint();
                 frames++;
                 deltaF--;
             }
@@ -89,6 +103,9 @@ public class Space implements Runnable{
                 frames = 0;
                 updates = 0;
             }
+            letzteZeit = jetztZeit;
+            //endregion
+
         }
     }
 }

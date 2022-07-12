@@ -18,7 +18,7 @@ public class SpacePanel extends JPanel{
 
         g.drawImage(merkurImg, 500,500,8,8,this);
         g.drawImage(venusImg, 400,500,19,19,this);
-        g.drawImage(erdeImg, Space.xDirErde,500,20,20,this);
+        g.drawImage(erdeImg, (int)Space.xDirErde,(int)Space.yDirErde,20,20,this);
         g.drawImage(erdMondImg, 450,230,5,5,this);
         g.drawImage(marsImg, 200,500,11,11,this);
         g.drawImage(jupiterImg, 100,500,43,43,this);
