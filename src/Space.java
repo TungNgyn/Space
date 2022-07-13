@@ -48,8 +48,8 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirMerkur = (46+spacePanel.sonnenZentrum) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirMerkur = (69+spacePanel.sonnenZentrum) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirMerkur = (46+spacePanel.sonneDm) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
+                yDirMerkur = (69+spacePanel.sonneDm) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
                 spacePanel.repaint();
 //                zaehler = zaehler+1.0/88*(geschwindigkeitsSlider.getValue());
             }
@@ -61,8 +61,8 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirVenus = (107+spacePanel.sonnenZentrum) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirVenus = (108+spacePanel.sonnenZentrum) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirVenus = (107+spacePanel.sonneDm) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
+                yDirVenus = (108+spacePanel.sonneDm) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
                 spacePanel.repaint();
 //                zaehler = zaehler+1.0/225*(geschwindigkeitsSlider.getValue());
             }
@@ -74,8 +74,8 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirErde = (147+spacePanel.sonnenZentrum) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirErde = (152+spacePanel.sonnenZentrum) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirErde = (147+spacePanel.sonneDm+63) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
+                yDirErde = (152+spacePanel.sonneDm+63) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
                 spacePanel.repaint();
 //                zaehler = zaehler+1.0/365*(geschwindigkeitsSlider.getValue());
             }
@@ -87,8 +87,8 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirMars = (206+spacePanel.sonnenZentrum) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirMars = (249+spacePanel.sonnenZentrum) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirMars = (206+spacePanel.sonneDm+34) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
+                yDirMars = (249+spacePanel.sonneDm+34) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
                 spacePanel.repaint();
 //                zaehler = zaehler+1.0/686*(geschwindigkeitsSlider.getValue());
             }
@@ -100,8 +100,8 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirJupiter = (740+spacePanel.sonnenZentrum) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirJupiter = (816+spacePanel.sonnenZentrum) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirJupiter = (740+spacePanel.sonneDm+699) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
+                yDirJupiter = (816+spacePanel.sonneDm+699) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
                 spacePanel.repaint();
 //                zaehler = zaehler+1.0/4332*(geschwindigkeitsSlider.getValue());
             }
@@ -113,8 +113,8 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirSaturn = (1352+spacePanel.sonnenZentrum) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirSaturn = (1514+spacePanel.sonnenZentrum) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirSaturn = (1352+spacePanel.sonneDm+1020) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
+                yDirSaturn = (1514+spacePanel.sonneDm+1020) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
                 spacePanel.repaint();
 //                zaehler = zaehler+1.0/10759*(geschwindigkeitsSlider.getValue());
             }
@@ -126,8 +126,8 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirUranus = (2735+spacePanel.sonnenZentrum) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirUranus = (3006+spacePanel.sonnenZentrum) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirUranus = (2735+spacePanel.sonneDm+254) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
+                yDirUranus = (3006+spacePanel.sonneDm+254) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
                 spacePanel.repaint();
 //                zaehler = zaehler+1.0/30688*(geschwindigkeitsSlider.getValue());
             }
@@ -139,8 +139,8 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirNeptun = (4460+spacePanel.sonnenZentrum) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirNeptun = (4540+spacePanel.sonnenZentrum) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirNeptun = (4460+spacePanel.sonneDm+246) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
+                yDirNeptun = (4540+spacePanel.sonneDm+246) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
                 spacePanel.repaint();
 //                zaehler = zaehler+1.0/60195*(geschwindigkeitsSlider.getValue());
             }
@@ -152,8 +152,8 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirPluto = (7000+spacePanel.sonnenZentrum) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirPluto = (7376+spacePanel.sonnenZentrum) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirPluto = (7000+spacePanel.sonneDm+12) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
+                yDirPluto = (7376+spacePanel.sonneDm+12) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
                 spacePanel.repaint();
 //                zaehler = zaehler+1.0/90560*(geschwindigkeitsSlider.getValue());
             }
