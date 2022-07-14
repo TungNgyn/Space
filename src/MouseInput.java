@@ -9,10 +9,10 @@ public class MouseInput implements MouseListener, MouseMotionListener, MouseWhee
     static boolean init = true;
      Point dragStartScreen;
      Point dragEndScreen;
-     int zoomLevel = 0;
+     static int zoomLevel = 0;
      int minZoomLevel = -50;
-     int maxZoomLevel = 10;
-     double zoomMultiplicationFactor = 1.1;
+     int maxZoomLevel = 75;
+     static double zoomFaktor = 1.1;
      static AffineTransform coordTransform = new AffineTransform();
 
 
@@ -56,15 +56,6 @@ public class MouseInput implements MouseListener, MouseMotionListener, MouseWhee
 
     @Override
     public void mouseWheelMoved(MouseWheelEvent e) {
-//        if (e.getWheelRotation() < 0) {
-//            Space.zoomFaktor *= 1.1;
-//            spacePanel.repaint();
-//        }
-//
-//        if (e.getWheelRotation() > 0) {
-//            Space.zoomFaktor /= 1.1;
-//            spacePanel.repaint();
-//        }
             zoom(e);
     }
     private void zoom(MouseWheelEvent e) {
@@ -75,7 +66,7 @@ public class MouseInput implements MouseListener, MouseMotionListener, MouseWhee
                 if (zoomLevel < maxZoomLevel) {
                     zoomLevel++;
                     Point2D p1 = transformPoint(p);
-                    coordTransform.scale(1 / zoomMultiplicationFactor, 1 / zoomMultiplicationFactor);
+                    coordTransform.scale(1 / zoomFaktor, 1 / zoomFaktor);
                     Point2D p2 = transformPoint(p);
                     coordTransform.translate(p2.getX() - p1.getX(), p2.getY() - p1.getY());
                     spacePanel.repaint();
@@ -84,7 +75,7 @@ public class MouseInput implements MouseListener, MouseMotionListener, MouseWhee
                 if (zoomLevel > minZoomLevel) {
                     zoomLevel--;
                     Point2D p1 = transformPoint(p);
-                    coordTransform.scale(zoomMultiplicationFactor, zoomMultiplicationFactor);
+                    coordTransform.scale(zoomFaktor, zoomFaktor);
                     Point2D p2 = transformPoint(p);
                     coordTransform.translate(p2.getX() - p1.getX(), p2.getY() - p1.getY());
                     spacePanel.repaint();
@@ -109,7 +100,7 @@ public class MouseInput implements MouseListener, MouseMotionListener, MouseWhee
             ex.printStackTrace();
         }
     }
-    private Point2D.Float transformPoint(Point p1) throws NoninvertibleTransformException {
+    public static Point2D.Float transformPoint(Point p1) throws NoninvertibleTransformException {
         AffineTransform inverse = coordTransform.createInverse();
         Point2D.Float p2 = new Point2D.Float();
         inverse.transform(p1, p2);

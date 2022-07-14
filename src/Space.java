@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.geom.NoninvertibleTransformException;
+import java.awt.geom.Point2D;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -16,8 +18,29 @@ public class Space implements Runnable{
     static double xDirJupiter, yDirJupiter, xDirSaturn, yDirSaturn, xDirUranus, yDirUranus, xDirNeptun, yDirNeptun;
     static double xDirPluto, yDirPluto;
 
-//    static double zoomFaktor = 1;
-//    static boolean zoom;
+    static double ae = 149597870*0.0008;
+    static double aphelMerkur = 0.466*ae;
+    static double perihelMerkur = 0.307*ae;
+    static double aphelVenus = 0.728*ae;
+    static double perihelVenus = 0.718*ae;
+    static double aphelErde = 1.017*ae;
+    static double perihelErde = 0.983*ae;
+    static double aphelMars = 1.666*ae;
+    static double perihelMars = 1.381*ae;
+    static double aphelJupiter = 5.459*ae;
+    static double perihelJupiter = 4.950*ae;
+    static double aphelSaturn = 10.124*ae;
+    static double perihelSaturn = 9.041*ae;
+    static double aphelUranus = 20.078*ae;
+    static double perihelUranus = 18.324*ae;
+    static double aphelNeptun = 30.385*ae;
+    static double perihelNeptun = 29.709*ae;
+    static double aphelPluto = 49.304*ae;
+    static double perihelPluto = 29.658*ae;
+
+    boolean erdeZoom = false;
+
+
 
     public Space() {
         spacePanel = new SpacePanel();
@@ -27,7 +50,6 @@ public class Space implements Runnable{
         spacePanel.addMouseWheelListener(mouseInput);
         geschwindigkeitsSlider = new JSlider(-100,100,1);
         geschwindigkeitsSlider.setPreferredSize(new Dimension(500,10));
-//        spacePanel.add(geschwindigkeitsSlider);
         setImg();
         setFrame();
 
@@ -48,10 +70,10 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirMerkur = (46+spacePanel.sonneDm) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirMerkur = (69+spacePanel.sonneDm) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirMerkur = ((perihelMerkur) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
+                yDirMerkur = ((aphelMerkur) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-//                zaehler = zaehler+1.0/88*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+1.0/88*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -61,10 +83,10 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirVenus = (107+spacePanel.sonneDm) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirVenus = (108+spacePanel.sonneDm) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirVenus = ((perihelVenus) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
+                yDirVenus = ((aphelVenus) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-//                zaehler = zaehler+1.0/225*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+1.0/225*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -74,10 +96,10 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirErde = (147+spacePanel.sonneDm+63) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirErde = (152+spacePanel.sonneDm+63) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirErde = ((perihelErde) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
+                yDirErde = ((aphelErde) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-//                zaehler = zaehler+1.0/365*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+1.0/365*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -87,10 +109,10 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirMars = (206+spacePanel.sonneDm+34) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirMars = (249+spacePanel.sonneDm+34) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirMars = ((perihelMars) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
+                yDirMars = ((aphelMars) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-//                zaehler = zaehler+1.0/686*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+1.0/686*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -100,10 +122,10 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirJupiter = (740+spacePanel.sonneDm+699) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirJupiter = (816+spacePanel.sonneDm+699) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirJupiter = ((perihelJupiter) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
+                yDirJupiter = ((aphelJupiter) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-//                zaehler = zaehler+1.0/4332*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+1.0/4332*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -113,10 +135,10 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirSaturn = (1352+spacePanel.sonneDm+1020) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirSaturn = (1514+spacePanel.sonneDm+1020) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirSaturn = ((perihelSaturn) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
+                yDirSaturn = ((aphelSaturn) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-//                zaehler = zaehler+1.0/10759*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+1.0/10759*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -126,10 +148,10 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirUranus = (2735+spacePanel.sonneDm+254) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirUranus = (3006+spacePanel.sonneDm+254) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirUranus = ((perihelUranus) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
+                yDirUranus = ((aphelUranus) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-//                zaehler = zaehler+1.0/30688*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+1.0/30688*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -139,10 +161,10 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirNeptun = (4460+spacePanel.sonneDm+246) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirNeptun = (4540+spacePanel.sonneDm+246) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirNeptun = ((perihelNeptun) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
+                yDirNeptun = ((aphelNeptun) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-//                zaehler = zaehler+1.0/60195*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+1.0/60195*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -152,10 +174,10 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirPluto = (7000+spacePanel.sonneDm+12) * (Math.cos(zaehler))+(spaceFrame.getWidth()/2);
-                yDirPluto = (7376+spacePanel.sonneDm+12) * (Math.sin(zaehler))+(spaceFrame.getHeight()/2);
+                xDirPluto = ((perihelPluto) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
+                yDirPluto = ((aphelPluto) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-//                zaehler = zaehler+1.0/90560*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+1.0/90560*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -168,6 +190,35 @@ public class Space implements Runnable{
         spaceFrame.pack();
         spaceFrame.setVisible(true);
         spaceFrame.setLocationRelativeTo(null);
+        JFrame adminFrame = new JFrame("Admin");
+        JPanel adminPanel = new JPanel();
+        JButton stopBtn = new JButton("Stop");
+        JButton erdeBtn = new JButton("Erde");
+
+        adminPanel.add(stopBtn);
+        adminPanel.add(erdeBtn);
+        adminFrame.add(adminPanel);
+        adminFrame.setPreferredSize(new Dimension(200,100));
+        adminFrame.setResizable(false);
+        adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        adminFrame.pack();
+        adminFrame.setVisible(true);
+
+        stopBtn.addActionListener(e -> {
+            geschwindigkeitsSlider.setValue(0);
+        });
+        erdeBtn.addActionListener(e -> {
+
+            spacePanel.repaint();
+
+//            if (!erdeZoom) {
+//                spacePanel.erdeDm *= 10000;
+//                erdeZoom = true;
+//            } else if (erdeZoom){
+//                spacePanel.erdeDm /= 10000;
+//                erdeZoom = false;
+//            }
+        });
     }
     public void setImg() {
         spacePanel.spaceImg = new ImageIcon("res/Space.png").getImage();
@@ -188,7 +239,6 @@ public class Space implements Runnable{
         yDelta = y;
         spacePanel.repaint();
     }
-
     @Override
     public void run() {
         double timePerFrame = 1000000000.0 / 120;

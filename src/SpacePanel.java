@@ -5,16 +5,16 @@ import java.awt.geom.AffineTransform;
 public class SpacePanel extends JPanel{
     Image spaceImg, sonneImg, rocketImg, erdeImg, erdMondImg, merkurImg, venusImg,
             marsImg, jupiterImg, saturnImg, uranusImg, neptunImg, plutoImg;
-    int sonneDm = 1392700;
-    int merkurDm = 4879;
-    int venusDm = 12104;
-    int erdeDm = 12742;
-    int marsDm = 6779;
-    int jupiterDm = 139820;
-    int saturnDm = 116460;
-    int uranusDm = 50724;
-    int neptunDm = 49244;
-    int plutoDm = 2376;
+    double sonneDm = 1392700*0.0008;
+    double merkurDm = 4879*0.0008;
+    double venusDm = 12104*0.0008;
+    double erdeDm = 12742*10;
+    double marsDm = 6779*0.0008;
+    double jupiterDm = 139820*0.0008;
+    double saturnDm = 266460*0.0008;
+    double uranusDm = 50724*0.0008;
+    double neptunDm = 49244*0.0008;
+    double plutoDm = 2376*0.0008;
 
     AffineTransform at = new AffineTransform();
 
@@ -31,7 +31,7 @@ public class SpacePanel extends JPanel{
 
 
         at.translate(x,y);
-        at.scale(0.0008, 0.0008);
+        at.scale(1, 1);
 
         if (MouseInput.init) {
             g2.setTransform(at);
@@ -41,13 +41,7 @@ public class SpacePanel extends JPanel{
             g2.setTransform(MouseInput.coordTransform);
         }
 
-//        double bildZoom = 1;
-//        bildZoom += Space.zoomFaktor*10;
-//        double spaceWidth = 1600+(bildZoom);
-//        double spaceHeight = 900+(bildZoom);
-//        g2.drawImage(spaceImg, -1600,-900,16000,9000,this);
-        g2.drawImage(sonneImg, 0,0,
-                (int) (sonneDm),(int) (sonneDm),this);
+        g2.drawImage(sonneImg, 0,0, (int) (sonneDm),(int) (sonneDm),this);
 
         g2.drawImage(rocketImg, Space.xDelta,Space.yDelta,48,48,this);
 
