@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.awt.geom.AffineTransform;
@@ -10,7 +11,7 @@ public class MouseInput implements MouseListener, MouseMotionListener, MouseWhee
      Point dragStartScreen;
      Point dragEndScreen;
      static int zoomLevel = 0;
-     int minZoomLevel = -50;
+     int minZoomLevel = -75;
      int maxZoomLevel = 75;
      static double zoomFaktor = 1.1;
      static AffineTransform coordTransform = new AffineTransform();
@@ -21,13 +22,17 @@ public class MouseInput implements MouseListener, MouseMotionListener, MouseWhee
     }
     @Override
     public void mouseClicked(MouseEvent e) {
-
+        if (e.isControlDown()) {
+            Space.setRocketPos(e.getX(), e.getY());
+        }
     }
 
     @Override
     public void mousePressed(MouseEvent e) {
         dragStartScreen = e.getPoint();
         dragEndScreen = null;
+
+
     }
 
     @Override
@@ -47,7 +52,11 @@ public class MouseInput implements MouseListener, MouseMotionListener, MouseWhee
 
     @Override
     public void mouseDragged(MouseEvent e) {
-        pan(e);
+        if (e.isControlDown()) {
+            Space.setRocketPos(e.getX(), e.getY());
+        } else {
+            pan(e);
+        }
     }
 
     @Override

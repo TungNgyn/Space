@@ -1,7 +1,5 @@
 import javax.swing.*;
 import java.awt.*;
-import java.awt.geom.NoninvertibleTransformException;
-import java.awt.geom.Point2D;
 import java.util.Timer;
 import java.util.TimerTask;
 
@@ -17,6 +15,7 @@ public class Space implements Runnable{
     static double xDirMerkur, yDirMerkur, xDirVenus, yDirVenus, xDirErde, yDirErde, xDirMars, yDirMars;
     static double xDirJupiter, yDirJupiter, xDirSaturn, yDirSaturn, xDirUranus, yDirUranus, xDirNeptun, yDirNeptun;
     static double xDirPluto, yDirPluto;
+    static double xDirErdMond, yDirErdMond;
 
     static double ae = 149597870*0.0008;
     static double aphelMerkur = 0.466*ae;
@@ -25,6 +24,10 @@ public class Space implements Runnable{
     static double perihelVenus = 0.718*ae;
     static double aphelErde = 1.017*ae;
     static double perihelErde = 0.983*ae;
+
+    static double apoErdMond = 0.4055*0.00271060008*ae;
+    static double periErdMond = 363300*0.0024285105*ae;
+
     static double aphelMars = 1.666*ae;
     static double perihelMars = 1.381*ae;
     static double aphelJupiter = 5.459*ae;
@@ -38,18 +41,33 @@ public class Space implements Runnable{
     static double aphelPluto = 49.304*ae;
     static double perihelPluto = 29.658*ae;
 
-    boolean erdeZoom = false;
+    static boolean sonneKreis = false;
+    static boolean merkurKreis = false;
+    static boolean venusKreis = false;
+    static boolean erdeKreis = false;
+    static boolean marsKreis = false;
+    static boolean jupiterKreis = false;
+    static boolean saturnKreis = false;
+    static boolean uranusKreis = false;
+    static boolean neptunKreis = false;
+    static boolean plutoKreis = false;
+    static boolean stop = false;
 
+    static int temp;
 
 
     public Space() {
         spacePanel = new SpacePanel();
+
+        spacePanel.setAutoscrolls(true);
+        spacePanel.add(new JScrollPane());
+
         mouseInput = new MouseInput(spacePanel);
         spacePanel.addMouseListener(mouseInput);
         spacePanel.addMouseMotionListener(mouseInput);
         spacePanel.addMouseWheelListener(mouseInput);
-        geschwindigkeitsSlider = new JSlider(-100,100,1);
-        geschwindigkeitsSlider.setPreferredSize(new Dimension(500,10));
+        geschwindigkeitsSlider = new JSlider(-5,5,0);
+        geschwindigkeitsSlider.setPreferredSize(new Dimension(100,50));
         setImg();
         setFrame();
 
@@ -57,6 +75,7 @@ public class Space implements Runnable{
         merkurOrbit();
         venusOrbit();
         erdeOrbit();
+        erdMondOrbit();
         marsOrbit();
         jupiterOrbit();
         saturnOrbit();
@@ -100,6 +119,19 @@ public class Space implements Runnable{
                 yDirErde = ((aphelErde) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
                 zaehler = zaehler+1.0/365*(geschwindigkeitsSlider.getValue());
+            }
+        },0,10);
+    }
+    public void erdMondOrbit() {
+        Timer timer = new Timer();
+        timer.scheduleAtFixedRate(new TimerTask() {
+            double zaehler = 0;
+            @Override
+            public void run() {
+                xDirErdMond = ((perihelErde) * (Math.cos(zaehler)))+(spacePanel.erdeDm/2);
+                yDirErdMond = ((aphelErde) * (Math.sin(zaehler)))+(spacePanel.erdeDm/2);
+                spacePanel.repaint();
+                zaehler = zaehler+1.0/28.3217*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -193,37 +225,122 @@ public class Space implements Runnable{
         JFrame adminFrame = new JFrame("Admin");
         JPanel adminPanel = new JPanel();
         JButton stopBtn = new JButton("Stop");
+        JButton sonneBtn = new JButton("Sonne");
+        JButton merkurBtn = new JButton("Merkur");
+        JButton venusBtn = new JButton("Venus");
         JButton erdeBtn = new JButton("Erde");
+        JButton marsBtn = new JButton("Mars");
+        JButton jupiterBtn = new JButton("Jupiter");
+        JButton saturnBtn = new JButton("Saturn");
+        JButton uranusBtn = new JButton("Uranus");
+        JButton neptunBtn = new JButton("Neptun");
+        JButton plutoBtn = new JButton("Pluto");
 
-        adminPanel.add(stopBtn);
+        adminPanel.add(sonneBtn);
+        adminPanel.add(merkurBtn);
+        adminPanel.add(venusBtn);
         adminPanel.add(erdeBtn);
+        adminPanel.add(marsBtn);
+        adminPanel.add(jupiterBtn);
+        adminPanel.add(saturnBtn);
+        adminPanel.add(uranusBtn);
+        adminPanel.add(neptunBtn);
+        adminPanel.add(plutoBtn);
+        adminPanel.add(stopBtn);
+        adminPanel.add(geschwindigkeitsSlider);
         adminFrame.add(adminPanel);
-        adminFrame.setPreferredSize(new Dimension(200,100));
+        adminFrame.setPreferredSize(new Dimension(200,250));
         adminFrame.setResizable(false);
         adminFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         adminFrame.pack();
         adminFrame.setVisible(true);
 
         stopBtn.addActionListener(e -> {
-            geschwindigkeitsSlider.setValue(0);
+            if (!stop) {
+                temp = geschwindigkeitsSlider.getValue();
+                geschwindigkeitsSlider.setValue(0);
+                stop = true;
+            } else if (stop) {
+                geschwindigkeitsSlider.setValue(temp);
+                stop = false;
+            }
+        });
+        sonneBtn.addActionListener(e -> {
+            if (!sonneKreis) {
+                sonneKreis = true;
+            } else {
+                sonneKreis = false;
+            }
+        });
+        merkurBtn.addActionListener(e -> {
+            if (!merkurKreis) {
+                merkurKreis = true;
+            } else {
+                merkurKreis = false;
+            }
+        });
+        venusBtn.addActionListener(e -> {
+            if (!venusKreis) {
+                venusKreis = true;
+            } else {
+                venusKreis = false;
+            }
         });
         erdeBtn.addActionListener(e -> {
-
-            spacePanel.repaint();
-
-//            if (!erdeZoom) {
-//                spacePanel.erdeDm *= 10000;
-//                erdeZoom = true;
-//            } else if (erdeZoom){
-//                spacePanel.erdeDm /= 10000;
-//                erdeZoom = false;
-//            }
+            if (!erdeKreis) {
+                erdeKreis = true;
+            } else {
+                erdeKreis = false;
+            }
+        });
+        marsBtn.addActionListener(e -> {
+            if (!marsKreis) {
+                marsKreis = true;
+            } else {
+                marsKreis = false;
+            }
+        });
+        jupiterBtn.addActionListener(e -> {
+            if (!jupiterKreis) {
+                jupiterKreis = true;
+            } else {
+                jupiterKreis = false;
+            }
+        });
+        saturnBtn.addActionListener(e -> {
+            if (!saturnKreis) {
+                saturnKreis = true;
+            } else {
+                saturnKreis = false;
+            }
+        });
+        uranusBtn.addActionListener(e -> {
+            if (!uranusKreis) {
+                uranusKreis = true;
+            } else {
+                uranusKreis = false;
+            }
+        });
+        neptunBtn.addActionListener(e -> {
+            if (!neptunKreis) {
+                neptunKreis = true;
+            } else {
+                neptunKreis = false;
+            }
+        });
+        plutoBtn.addActionListener(e -> {
+            if (!plutoKreis) {
+                plutoKreis = true;
+            } else {
+                plutoKreis = false;
+            }
         });
     }
     public void setImg() {
+        spacePanel.kreisImg = new ImageIcon("res/Kreis.png").getImage();
         spacePanel.spaceImg = new ImageIcon("res/Space.png").getImage();
         spacePanel.sonneImg = new ImageIcon(("res/Sonne.png")).getImage();
-        spacePanel.rocketImg = new ImageIcon("res/Rocket.png").getImage();
+        spacePanel.raketeImg = new ImageIcon("res/Rakete.png").getImage();
         spacePanel.erdeImg = new ImageIcon("res/Erde.png").getImage();
         spacePanel.erdMondImg = new ImageIcon("res/ErdMond.png").getImage();
         spacePanel.merkurImg = new ImageIcon("res/Merkur.png").getImage();
