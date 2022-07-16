@@ -11,6 +11,7 @@ public class SpacePanel extends JPanel{
     double merkurDm = 4879*SCALE;
     double venusDm = 12104*SCALE;
     double erdeDm = 12742*SCALE;
+    double erdMondDm = 3474*SCALE;
     double marsDm = 6779*SCALE;
     double jupiterDm = 139820*SCALE;
     double saturnDm = 266460*SCALE;
@@ -61,7 +62,7 @@ public class SpacePanel extends JPanel{
             g2.drawImage(kreisImg,(int)(Space.xDirErde-5000),(int)(Space.yDirErde-5000),10000,10000,this);
         g2.drawImage(erdeImg, (int)(Space.xDirErde),(int)(Space.yDirErde),(int) (erdeDm),(int) (erdeDm),this);
 
-        g2.drawImage(erdMondImg, (int)(Space.xDirErdMond),(int)(Space.yDirErdMond),3474,3474,this);
+        g2.drawImage(erdMondImg, (int)(Space.xDirErdMond),(int)(Space.yDirErdMond),(int)erdMondDm,(int) erdMondDm,this);
 
         if (Space.marsKreis)
             g2.drawImage(kreisImg,(int)(Space.xDirMars-5000),(int)(Space.yDirMars-5000),10000,10000,this);

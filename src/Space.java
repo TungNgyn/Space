@@ -26,7 +26,7 @@ public class Space implements Runnable{
     static double perihelErde = 0.983*ae;
 
     static double apoErdMond = 0.4055*0.00271060008*ae;
-    static double periErdMond = 363300*0.0024285105*ae;
+    static double periErdMond = 0.363300*0.0024285105*ae;
 
     static double aphelMars = 1.666*ae;
     static double perihelMars = 1.381*ae;
@@ -92,7 +92,7 @@ public class Space implements Runnable{
                 xDirMerkur = ((perihelMerkur) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
                 yDirMerkur = ((aphelMerkur) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-                zaehler = zaehler+1.0/88*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+0.1/88*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -105,7 +105,7 @@ public class Space implements Runnable{
                 xDirVenus = ((perihelVenus) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
                 yDirVenus = ((aphelVenus) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-                zaehler = zaehler+1.0/225*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+0.1/225*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -118,7 +118,7 @@ public class Space implements Runnable{
                 xDirErde = ((perihelErde) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
                 yDirErde = ((aphelErde) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-                zaehler = zaehler+1.0/365*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+0.1/365*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -128,10 +128,10 @@ public class Space implements Runnable{
             double zaehler = 0;
             @Override
             public void run() {
-                xDirErdMond = ((perihelErde) * (Math.cos(zaehler)))+(spacePanel.erdeDm/2);
-                yDirErdMond = ((aphelErde) * (Math.sin(zaehler)))+(spacePanel.erdeDm/2);
+                xDirErdMond = ((periErdMond) * (Math.cos(zaehler)))+xDirErde;
+                yDirErdMond = ((apoErdMond) * (Math.sin(zaehler)))+yDirErde;
                 spacePanel.repaint();
-                zaehler = zaehler+1.0/28.3217*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+0.1/28.3217*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -144,7 +144,7 @@ public class Space implements Runnable{
                 xDirMars = ((perihelMars) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
                 yDirMars = ((aphelMars) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-                zaehler = zaehler+1.0/686*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+0.1/686*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -157,7 +157,7 @@ public class Space implements Runnable{
                 xDirJupiter = ((perihelJupiter) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
                 yDirJupiter = ((aphelJupiter) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-                zaehler = zaehler+1.0/4332*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+0.1/4332*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -170,7 +170,7 @@ public class Space implements Runnable{
                 xDirSaturn = ((perihelSaturn) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
                 yDirSaturn = ((aphelSaturn) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-                zaehler = zaehler+1.0/10759*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+0.1/10759*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -183,7 +183,7 @@ public class Space implements Runnable{
                 xDirUranus = ((perihelUranus) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
                 yDirUranus = ((aphelUranus) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-                zaehler = zaehler+1.0/30688*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+0.1/30688*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -196,7 +196,7 @@ public class Space implements Runnable{
                 xDirNeptun = ((perihelNeptun) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
                 yDirNeptun = ((aphelNeptun) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-                zaehler = zaehler+1.0/60195*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+0.1/60195*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
@@ -209,7 +209,7 @@ public class Space implements Runnable{
                 xDirPluto = ((perihelPluto) * (Math.cos(zaehler)))+(spacePanel.sonneDm/2);
                 yDirPluto = ((aphelPluto) * (Math.sin(zaehler)))+(spacePanel.sonneDm/2);
                 spacePanel.repaint();
-                zaehler = zaehler+1.0/90560*(geschwindigkeitsSlider.getValue());
+                zaehler = zaehler+0.1/90560*(geschwindigkeitsSlider.getValue());
             }
         },0,10);
     }
